@@ -12,6 +12,7 @@ class Album extends Component {
     this.state = {
       album: album,
       currentSong: album.songs[0],
+      isHovered: false,
       isPlaying: false
     };
 
@@ -46,6 +47,30 @@ class Album extends Component {
     }
   }
 
+  toggleSongNumber(song, index){
+    if (song === this.state.isHovered) {
+      if (song === this.state.currentSong && this.state.isPlaying){
+        return <span className="icon ion-md-pause" />
+      } else {
+        return <span className="icon ion-md-play" />
+      }
+    } else {
+      if (song === this.state.currentSong && this.state.isPlaying){
+        return <span className="icon ion-md-pause" />
+      } else {
+        return index + 1;
+      }
+    }
+  }
+
+  handleSongEnter(song){
+    this.setState({isHovered: song});
+  }
+
+  handleSongLeave(){
+    this.setState({isHovered: false});
+  }
+
   render(){
     return (
       <section className="album">
@@ -69,8 +94,10 @@ class Album extends Component {
           {this.state.album.songs.map( (song, index) =>
             <tr className="song"
                 key={index}
-                onClick={() => this.handleSongClick(song)}>
-              <td>{index+1}</td>
+                onClick={() => this.handleSongClick(song)}
+                onMouseEnter={() => this.handleSongEnter(song)}
+                onMouseLeave={() => this.handleSongLeave()}>
+              <td className="song-index">{this.toggleSongNumber(song, index)}</td>
               <td>{song.title}</td>
               <td>{song.duration}</td>
             </tr>)}
