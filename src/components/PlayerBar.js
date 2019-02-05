@@ -11,8 +11,7 @@ class PlayerBar extends Component {
           </button>
           
           <button id="play-pause">
-            <span className="icon ion-md-play"></span>
-            <span className="icon ion-md-pause"></span>
+            <span className={this.props.isPlaying ? 'icon ion-md-pause' : 'icon ion-md-play'}></span>
           </button>
       
           <button id="next">
