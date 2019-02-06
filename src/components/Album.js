@@ -51,7 +51,7 @@ class Album extends Component {
       }
     }
   }
-  
+
   handleSongClick(song) {
     const isSameSong = this.state.currentSong === song;
     if (this.state.isPlaying && isSameSong){
@@ -63,7 +63,7 @@ class Album extends Component {
       this.play();
     }
   }
-  
+
   handleSongEnter(song){
     this.setState({isHovered: song});
   }
@@ -71,10 +71,18 @@ class Album extends Component {
   handleSongLeave(){
     this.setState({isHovered: false});
   }
-  
+
   handlePrevClick(){
     const currentIndex = this.state.album.songs.findIndex( song => this.state.currentSong === song);
     const newIndex = Math.max(0, currentIndex-1);
+    const newSong = this.state.album.songs[newIndex];
+    this.setSong(newSong);
+    this.play();
+  }
+
+  handleNextClick(){
+    const currentIndex = this.state.album.songs.findIndex( song => this.state.currentSong === song);
+    const newIndex = Math.min(this.state.album.songs.length-1, currentIndex+1);
     const newSong = this.state.album.songs[newIndex];
     this.setSong(newSong);
     this.play();
@@ -93,7 +101,7 @@ class Album extends Component {
             <div id='release-info'>{this.state.album.releaseInfo}</div>
           </div>
         </section>
-      
+
         <table id='song-list'>
           <colgroup>
             <col id='song-number-column' />
@@ -113,12 +121,13 @@ class Album extends Component {
             </tr>)}
           </tbody>
         </table>
-        
-        <PlayerBar 
+
+        <PlayerBar
           isPlaying={this.state.isPlaying}
           currentSong={this.state.currentSong}
           handleSongClick={ () => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={ () => this.handlePrevClick()}
+          handleNextClick={ () => this.handleNextClick()}
         />
       </section>
     );
