@@ -73,12 +73,12 @@ class Album extends Component {
     }
   }
 
-  handleSongClick(song) {
+  handleSongClick(song){
     const isSameSong = this.state.currentSong === song;
     if (this.state.isPlaying && isSameSong){
       this.pause();
     } else {
-      if (!isSameSong) {
+      if (!isSameSong){
         this.setSong(song);
       }
       this.play();
@@ -108,11 +108,28 @@ class Album extends Component {
     this.setSong(newSong);
     this.play();
   }
-  
+
   handleTimeChange(e){
     const newTime = this.audioElement.duration*e.target.value;
     this.audioElement.currentTime = newTime;
     this.setState( {currentTime: newTime} );
+  }
+
+  formatTime(time){
+    let stringTime = "";
+    let minutes = Math.trunc(time/60);
+    let seconds = Math.floor(time%60);
+
+    if (time >= 0 && !isNaN(time)){
+      if (seconds < 10){
+        stringTime = minutes+":0"+seconds;
+      } else {
+        stringTime = minutes+":"+seconds;
+      }
+      return stringTime;
+    } else {
+      return "-:--";
+    }
   }
 
   render(){
@@ -144,7 +161,7 @@ class Album extends Component {
                 onMouseLeave={() => this.handleSongLeave()}>
               <td className="song-index">{this.toggleSongNumber(song, index)}</td>
               <td>{song.title}</td>
-              <td>{song.duration}</td>
+              <td>{this.formatTime(song.duration)}</td>
             </tr>)}
           </tbody>
         </table>
@@ -157,7 +174,8 @@ class Album extends Component {
           handleSongClick={ () => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={ () => this.handlePrevClick()}
           handleNextClick={ () => this.handleNextClick()}
-          handleTimeChange{ (e) => this.handleTimeChange(e)}
+          handleTimeChange={ (e) => this.handleTimeChange(e)}
+          formatTime={ (time) => this.formatTime(time)}
         />
       </section>
     );
