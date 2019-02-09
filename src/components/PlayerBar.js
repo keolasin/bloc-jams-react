@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 
 class PlayerBar extends Component {
+  checkVolume(){
+    let volumeIcon = '';
+    if (this.props.volume === 0 ){
+      volumeIcon = 'icon ion-md-volume-mute';
+    } else if (this.props.volume <= 0.75){
+      volumeIcon = 'icon ion-md-volume-low';
+    } else {
+      volumeIcon = 'icon ion-md-volume-high';
+    }
+    return volumeIcon;
+  }
+
   render(){
     return(
       <section className="player-bar">
@@ -36,7 +48,7 @@ class PlayerBar extends Component {
           </button>
 
           <button id="volume-control">
-            <div className="icon ion-md-volume-low"></div>
+            <div className={this.checkVolume()}></div>
             <input
               type="range"
               className="seek-bar"
@@ -45,9 +57,7 @@ class PlayerBar extends Component {
               max="1"
               step="0.01"
               onChange={this.props.handleVolumeChange}
-              />
-            <div className="icon ion-md-volume-high"></div>
-
+            />
           </button>
         </section>
       </section>

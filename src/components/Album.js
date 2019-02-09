@@ -22,6 +22,7 @@ class Album extends Component {
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
+    console.log(this.audioElement.volume);
   }
 
   componentDidMount(){
@@ -123,11 +124,11 @@ class Album extends Component {
   }
 
   handleVolumeChange(e){
-    const newVolume = this.audioElement.volume*(e.target.value);
+    const newVolume = e.target.value;
     this.audioElement.volume = newVolume;
     this.setState( {volume: newVolume} );
+    console.log(this.audioElement.volume);
   }
-
 
 // formatting time
   formatTime(time){
