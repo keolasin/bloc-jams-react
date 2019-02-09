@@ -127,7 +127,6 @@ class Album extends Component {
     const newVolume = e.target.value;
     this.audioElement.volume = newVolume;
     this.setState( {volume: newVolume} );
-    console.log(this.audioElement.volume);
   }
 
 // formatting time
