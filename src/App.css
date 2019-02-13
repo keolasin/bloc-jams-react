@@ -180,3 +180,35 @@ img {
   font-size: 0.8em;
   text-shadow: 1px 1px 1px #191919;
 }
+
+/* album component styling */
+.album {
+  display: flex;
+  flex-direction: column;
+  margin-top: 58px;
+}
+
+#album-info {
+  margin: 10px;
+}
+
+/* PlayerBar */
+#buttons {
+  border: none;
+  color: white;
+}
+#previous {
+
+}
+
+#play-pause{
+
+}
+
+#next {
+
+}
+
+.seek-bar {
+  appearance: none;
+}
