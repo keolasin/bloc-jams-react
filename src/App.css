@@ -27,20 +27,20 @@ html {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   box-sizing: border-box;
   align-items: center;
 }
 
 header {
-  width: 100vw;
+  width: 100%;
   background-color: #AC5FF3;
   height: 59px;
   display: inline-flex;
-  position: fixed;
+  position: sticky;
   align-items: center;
   justify-content: center;
-  z-index: 3;
+
 }
 
 nav {
@@ -80,7 +80,6 @@ header h1 {
 }
 
 .hero-title {
-  margin-top: 55px;
   width: 100%;
   max-height: 60px;
   font-family: Bungee;
@@ -126,7 +125,6 @@ header h1 {
   align-items: stretch;
   justify-content: space-around;
   max-width: 100vw;
-  margin-top: 59px;
   padding: 25px;
 }
 
@@ -145,8 +143,6 @@ img {
   text-decoration: none;
 }
 
-
-
 .song-info {
   display: flex;
   position: relative;
@@ -159,21 +155,25 @@ img {
   font-family: Open-Sans;
 }
 
-.album-title {
+.album-title, #album-title, .album-artist, .artist, .album-song-count, #release-info {
+  font-family: Open-Sans;
+}
+
+.album-title, #album-title {
   color: #FFF3F7;
   font-weight: bold;
   font-size: 1.8em;
   text-shadow: 2px 2px 2px #191919;
 }
 
-.album-artist {
+.album-artist, .artist {
   color: #FFF3F7;
   font-style: italic;
   font-size: 1.3em;
   text-shadow: 2px 2px 2px #191919;
 }
 
-.album-song-count {
+.album-song-count, #release-info {
   color: #FFF3F7;
   font-style: italic;
   font-weight: 200;
@@ -185,30 +185,172 @@ img {
 .album {
   display: flex;
   flex-direction: column;
-  margin-top: 58px;
+  width: 100vw;
+  max-width: 1280px;
+  height: 100%;
 }
 
 #album-info {
-  margin: 10px;
+  display: flex;
+  height: 187.25px;
+  position: sticky;
+}
+#album-cover-art{
+  width: 187.25px;
+  height: 100%;
+}
+.album-details {
+  display: flex;
+  flex-direction: column;
+  margin: 0 6px;
+}
+
+@media screen and (max-width: 667px){
+  .album-details {
+    font-size: 4vw;
+  }
+}
+
+.song {
+  color: #191919;
+  display: flex;
+  align-items: center;
+}
+
+.odd-song-row, .even-song-row {
+  font-family: Open-Sans;
+}
+.even-song-row{
+  background-color: #FFC49A;
+}
+
+.odd-song-row{
+  background-color: #FB98C0;
+}
+
+table {
+  border: 1px solid #FFF3F7;
+  border-collapse: collapse;
+}
+td {
+  margin:0;
+  padding:0;
+  text-align: center;
+}
+
+.song-index {
+  margin: 0 5px;
+  width: 60px;
+}
+.song-title-td {
+  margin-left: 5px;
+  flex-grow: 2;
+  text-align: left;
+}
+.song-duration-td {
+  margin-right: 5px;
+  padding: 10px;
+  width: 60px;
+  max-width: 75px;
+  text-align: right;
 }
 
 /* PlayerBar */
-#buttons {
-  border: none;
-  color: white;
+.player-bar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #FFF3F7;
+  background-color: #FF9D58;
+  width: 100%;
+  max-width: 1280px;
+  height: 120px;
+  position: fixed;
+  bottom: 0;
 }
-#previous {
 
+.controlButtons {
+  display: inline;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+#time-control {
+  display: inline-flex;
+  max-width: 1000px;
+  align-items: center;
+  justify-content: center;
+}
+
+.current-time, .total-time {
+  color: #FFF3F7;
+  font-family: Open-Sans;
+  margin: auto 5px;
+}
+
+#previous, #play-pause, #next {
+  margin: 5px;
+}
+
+#previous {
+  color: #FFF3F7;
+  cursor: pointer;
 }
 
 #play-pause{
+ color: #ac5ff3;
+ cursor: pointer;
+ margin-left: 7px;
 
 }
 
 #next {
+  color: #FFF3F7;
+  cursor: pointer;
+}
 
+#time-seek {
+  width: 90vw;
+}
+#volume-control{
+  color: #FFF3F7;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
+
+#volume-control div {
+  margin-right: 10px;
 }
 
 .seek-bar {
   appearance: none;
+  height: 0.5vh;
+  max-width: 70%;
+  outline: none;
+  opacity: 50%;
+}
+
+.seek-bar:hover {
+  opacity: 1;
+}
+.seek-bar::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
+  height: 10px;
+  background: #ac5ff3;
+  cursor: pointer;
+}
+
+.seek-bar::-moz-range-thumb{
+ width: 5px;
+ height: 10px;
+ background: #ac5ff3;
+ cursor: pointer;
 }

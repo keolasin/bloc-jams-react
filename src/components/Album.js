@@ -169,14 +169,14 @@ class Album extends Component {
           </colgroup>
           <tbody>
           {this.state.album.songs.map( (song, index) =>
-            <tr className="song"
+            <tr className="song" className={index%2 == 0 ? 'even-song-row' : 'odd-song-row'}
                 key={index}
                 onClick={() => this.handleSongClick(song)}
                 onMouseEnter={() => this.handleSongEnter(song)}
                 onMouseLeave={() => this.handleSongLeave()}>
               <td className="song-index">{this.toggleSongNumber(song, index)}</td>
-              <td>{song.title}</td>
-              <td>{this.formatTime(song.duration)}</td>
+              <td className="song-title-td">{song.title}</td>
+              <td className="song-duration-td">{this.formatTime(song.duration)}</td>
             </tr>)}
           </tbody>
         </table>
